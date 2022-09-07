@@ -1,0 +1,18 @@
+package com.ucc2.teste;
+
+import com.ucc2.auxiliar.FormateData;
+
+public class TesteM {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String str = FormateData.getVal(2800.00);
+		System.out.println(">>>>> " + str);
+		// str= str.replace(".", ",");
+		// System.out.println("2>>>>> "+str);
+		// str= str.replace(",", ".");
+		// System.out.println("3>>>>> "+str);
+	}
+
+}

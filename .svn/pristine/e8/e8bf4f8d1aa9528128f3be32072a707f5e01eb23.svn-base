@@ -1,0 +1,318 @@
+package com.ucc2.doc.resumo;
+
+
+import java.awt.Image;
+
+import com.ucc2.doc.descritivo.BodyResumoDesc;
+
+public class BodyResumo {
+	
+	private String ProdutoTitulo;
+	private String ProdutoDescricao;
+	private byte []  ProdutoImagem;
+	private String ValorQuantidadeValue;
+	private String ValorQuantidadeUnidade;
+	private String ValorBaseValue;
+	private String ValorBaseUnidade;
+	private String ExtraValue;
+	private String TotalValueSemIva;
+	private String TotalComIva;
+	private String TotalUnidade;
+	private String totalEuro;
+	private String vaDesc;
+	private String valorMes;
+	private String valorBruto;
+	private String valorRond;
+	private String Taxa;
+	
+	private BodyResumoDesc [] BodyResumoDesc;
+	
+	public BodyResumo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public BodyResumo(String produtoTitulo, String produtoDescricao,
+			byte[] produtoImagem, String valorQuantidadeValue,
+			String valorQuantidadeUnidade, String valorBaseValue,
+			String valorBaseUnidade, String extraValue,
+			String totalValueSemIva, String totalComIva, String totalUnidade,
+			String totalEuro, String vaDesc, String valorMes,
+			String valorBruto, String valorRond, String taxa,
+			com.ucc2.doc.descritivo.BodyResumoDesc[] bodyResumoDesc) {
+		super();
+		ProdutoTitulo = produtoTitulo;
+		ProdutoDescricao = produtoDescricao;
+		ProdutoImagem = produtoImagem;
+		ValorQuantidadeValue = valorQuantidadeValue;
+		ValorQuantidadeUnidade = valorQuantidadeUnidade;
+		ValorBaseValue = valorBaseValue;
+		ValorBaseUnidade = valorBaseUnidade;
+		ExtraValue = extraValue;
+		TotalValueSemIva = totalValueSemIva;
+		TotalComIva = totalComIva;
+		TotalUnidade = totalUnidade;
+		this.totalEuro = totalEuro;
+		this.vaDesc = vaDesc;
+		this.valorMes = valorMes;
+		this.valorBruto = valorBruto;
+		this.valorRond = valorRond;
+		Taxa = taxa;
+		BodyResumoDesc = bodyResumoDesc;
+	}
+
+	/**
+	 * @return the produtoTitulo
+	 */
+	public String getProdutoTitulo() {
+		return ProdutoTitulo;
+	}
+
+	/**
+	 * @param produtoTitulo the produtoTitulo to set
+	 */
+	public void setProdutoTitulo(String produtoTitulo) {
+		ProdutoTitulo = produtoTitulo;
+	}
+
+	/**
+	 * @return the produtoDescricao
+	 */
+	public String getProdutoDescricao() {
+		return ProdutoDescricao;
+	}
+
+	/**
+	 * @param produtoDescricao the produtoDescricao to set
+	 */
+	public void setProdutoDescricao(String produtoDescricao) {
+		ProdutoDescricao = produtoDescricao;
+	}
+
+	/**
+	 * @return the produtoImagem
+	 */
+	public byte[] getProdutoImagem() {
+		return ProdutoImagem;
+	}
+
+	/**
+	 * @param produtoImagem the produtoImagem to set
+	 */
+	public void setProdutoImagem(byte[] produtoImagem) {
+		ProdutoImagem = produtoImagem;
+	}
+
+	/**
+	 * @return the valorQuantidadeValue
+	 */
+	public String getValorQuantidadeValue() {
+		return ValorQuantidadeValue;
+	}
+
+	/**
+	 * @param valorQuantidadeValue the valorQuantidadeValue to set
+	 */
+	public void setValorQuantidadeValue(String valorQuantidadeValue) {
+		ValorQuantidadeValue = valorQuantidadeValue;
+	}
+
+	/**
+	 * @return the valorQuantidadeUnidade
+	 */
+	public String getValorQuantidadeUnidade() {
+		return ValorQuantidadeUnidade;
+	}
+
+	/**
+	 * @param valorQuantidadeUnidade the valorQuantidadeUnidade to set
+	 */
+	public void setValorQuantidadeUnidade(String valorQuantidadeUnidade) {
+		ValorQuantidadeUnidade = valorQuantidadeUnidade;
+	}
+
+	/**
+	 * @return the valorBaseValue
+	 */
+	public String getValorBaseValue() {
+		return ValorBaseValue;
+	}
+
+	/**
+	 * @param valorBaseValue the valorBaseValue to set
+	 */
+	public void setValorBaseValue(String valorBaseValue) {
+		ValorBaseValue = valorBaseValue;
+	}
+
+	/**
+	 * @return the valorBaseUnidade
+	 */
+	public String getValorBaseUnidade() {
+		return ValorBaseUnidade;
+	}
+
+	/**
+	 * @param valorBaseUnidade the valorBaseUnidade to set
+	 */
+	public void setValorBaseUnidade(String valorBaseUnidade) {
+		ValorBaseUnidade = valorBaseUnidade;
+	}
+
+	/**
+	 * @return the extraValue
+	 */
+	public String getExtraValue() {
+		return ExtraValue;
+	}
+
+	/**
+	 * @param extraValue the extraValue to set
+	 */
+	public void setExtraValue(String extraValue) {
+		ExtraValue = extraValue;
+	}
+
+	/**
+	 * @return the totalValueSemIva
+	 */
+	public String getTotalValueSemIva() {
+		return TotalValueSemIva;
+	}
+
+	/**
+	 * @param totalValueSemIva the totalValueSemIva to set
+	 */
+	public void setTotalValueSemIva(String totalValueSemIva) {
+		TotalValueSemIva = totalValueSemIva;
+	}
+
+	/**
+	 * @return the totalComIva
+	 */
+	public String getTotalComIva() {
+		return TotalComIva;
+	}
+
+	/**
+	 * @param totalComIva the totalComIva to set
+	 */
+	public void setTotalComIva(String totalComIva) {
+		TotalComIva = totalComIva;
+	}
+
+	/**
+	 * @return the totalUnidade
+	 */
+	public String getTotalUnidade() {
+		return TotalUnidade;
+	}
+
+	/**
+	 * @param totalUnidade the totalUnidade to set
+	 */
+	public void setTotalUnidade(String totalUnidade) {
+		TotalUnidade = totalUnidade;
+	}
+
+	/**
+	 * @return the totalEuro
+	 */
+	public String getTotalEuro() {
+		return totalEuro;
+	}
+
+	/**
+	 * @param totalEuro the totalEuro to set
+	 */
+	public void setTotalEuro(String totalEuro) {
+		this.totalEuro = totalEuro;
+	}
+
+	/**
+	 * @return the vaDesc
+	 */
+	public String getVaDesc() {
+		return vaDesc;
+	}
+
+	/**
+	 * @param vaDesc the vaDesc to set
+	 */
+	public void setVaDesc(String vaDesc) {
+		this.vaDesc = vaDesc;
+	}
+
+	/**
+	 * @return the valorMes
+	 */
+	public String getValorMes() {
+		return valorMes;
+	}
+
+	/**
+	 * @param valorMes the valorMes to set
+	 */
+	public void setValorMes(String valorMes) {
+		this.valorMes = valorMes;
+	}
+
+	/**
+	 * @return the valorBruto
+	 */
+	public String getValorBruto() {
+		return valorBruto;
+	}
+
+	/**
+	 * @param valorBruto the valorBruto to set
+	 */
+	public void setValorBruto(String valorBruto) {
+		this.valorBruto = valorBruto;
+	}
+
+	/**
+	 * @return the valorRond
+	 */
+	public String getValorRond() {
+		return valorRond;
+	}
+
+	/**
+	 * @param valorRond the valorRond to set
+	 */
+	public void setValorRond(String valorRond) {
+		this.valorRond = valorRond;
+	}
+
+	/**
+	 * @return the taxa
+	 */
+	public String getTaxa() {
+		return Taxa;
+	}
+
+	/**
+	 * @param taxa the taxa to set
+	 */
+	public void setTaxa(String taxa) {
+		Taxa = taxa;
+	}
+
+	/**
+	 * @return the bodyResumoDesc
+	 */
+	public BodyResumoDesc[] getBodyResumoDesc() {
+		return BodyResumoDesc;
+	}
+
+	/**
+	 * @param bodyResumoDesc the bodyResumoDesc to set
+	 */
+	public void setBodyResumoDesc(BodyResumoDesc[] bodyResumoDesc) {
+		BodyResumoDesc = bodyResumoDesc;
+	}
+
+	
+
+}

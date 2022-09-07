@@ -1,0 +1,391 @@
+package com.ucc2.master;
+
+import com.ucc2.doc.resumo.BodyResumo;
+
+public class Fatura {
+	
+	private String DataProcessamento;
+	private String NumCliente;
+	private String NumContaCliente;
+	private String NumFatura;
+	private String NomeCliente;
+	private String NominhoCliente;
+	private String Nif;
+	private String Morada;
+	private String ValorMes;
+	private String PeriodoFaturacao;
+	private String dataVencimento;
+	private String rodape;
+	private String entidade;
+	private String referencia;
+	private String mantante;
+	private String bi;
+	private String bca;
+	private String bai;
+	private String cecv;
+	private String cbn;
+    private String TypeHeader;
+    private String nomeSubConta;
+
+	private BodyResumo [] BodyResumo;
+
+	public Fatura() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Fatura(String dataProcessamento, String numCliente,
+			String numContaCliente, String numFatura, String nomeCliente,
+			String nominhoCliente, String nif, String morada, String valorMes,
+			String periodoFaturacao, String dataVencimento, String rodape,
+			String entidade, String referencia, String mantante, String bi,
+			String bca, String bai, String cecv, String cbn, String TypeHeader,String nomeSubConta,
+			com.ucc2.doc.resumo.BodyResumo[] bodyResumo) {
+		super();
+		DataProcessamento = dataProcessamento;
+		NumCliente = numCliente;
+		NumContaCliente = numContaCliente;
+		NumFatura = numFatura;
+		NomeCliente = nomeCliente;
+		NominhoCliente = nominhoCliente;
+		Nif = nif;
+		Morada = morada;
+		ValorMes = valorMes;
+		PeriodoFaturacao = periodoFaturacao;
+		this.dataVencimento = dataVencimento;
+		this.rodape = rodape;
+		this.entidade = entidade;
+		this.referencia = referencia;
+		this.mantante = mantante;
+		this.bi = bi;
+		this.bca = bca;
+		this.bai = bai;
+		this.cecv = cecv;
+		this.cbn = cbn;
+		this.TypeHeader=TypeHeader;
+		this.nomeSubConta = nomeSubConta;
+		BodyResumo = bodyResumo;
+	}
+
+	/**
+	 * @return the dataProcessamento
+	 */
+	public String getDataProcessamento() {
+		return DataProcessamento;
+	}
+
+	/**
+	 * @param dataProcessamento the dataProcessamento to set
+	 */
+	public void setDataProcessamento(String dataProcessamento) {
+		DataProcessamento = dataProcessamento;
+	}
+
+	/**
+	 * @return the numCliente
+	 */
+	public String getNumCliente() {
+		return NumCliente;
+	}
+
+	/**
+	 * @param numCliente the numCliente to set
+	 */
+	public void setNumCliente(String numCliente) {
+		NumCliente = numCliente;
+	}
+
+	/**
+	 * @return the numContaCliente
+	 */
+	public String getNumContaCliente() {
+		return NumContaCliente;
+	}
+
+	/**
+	 * @param numContaCliente the numContaCliente to set
+	 */
+	public void setNumContaCliente(String numContaCliente) {
+		NumContaCliente = numContaCliente;
+	}
+
+	/**
+	 * @return the numFatura
+	 */
+	public String getNumFatura() {
+		return NumFatura;
+	}
+
+	/**
+	 * @param numFatura the numFatura to set
+	 */
+	public void setNumFatura(String numFatura) {
+		NumFatura = numFatura;
+	}
+
+	/**
+	 * @return the nomeCliente
+	 */
+	public String getNomeCliente() {
+		return NomeCliente;
+	}
+
+	/**
+	 * @param nomeCliente the nomeCliente to set
+	 */
+	public void setNomeCliente(String nomeCliente) {
+		NomeCliente = nomeCliente;
+	}
+
+	/**
+	 * @return the nominhoCliente
+	 */
+	public String getNominhoCliente() {
+		return NominhoCliente;
+	}
+
+	/**
+	 * @param nominhoCliente the nominhoCliente to set
+	 */
+	public void setNominhoCliente(String nominhoCliente) {
+		NominhoCliente = nominhoCliente;
+	}
+
+	/**
+	 * @return the nif
+	 */
+	public String getNif() {
+		return Nif;
+	}
+
+	/**
+	 * @param nif the nif to set
+	 */
+	public void setNif(String nif) {
+		Nif = nif;
+	}
+
+	/**
+	 * @return the morada
+	 */
+	public String getMorada() {
+		return Morada;
+	}
+
+	/**
+	 * @param morada the morada to set
+	 */
+	public void setMorada(String morada) {
+		Morada = morada;
+	}
+
+	/**
+	 * @return the valorMes
+	 */
+	public String getValorMes() {
+		return ValorMes;
+	}
+
+	/**
+	 * @param valorMes the valorMes to set
+	 */
+	public void setValorMes(String valorMes) {
+		ValorMes = valorMes;
+	}
+
+	/**
+	 * @return the periodoFaturacao
+	 */
+	public String getPeriodoFaturacao() {
+		return PeriodoFaturacao;
+	}
+
+	/**
+	 * @param periodoFaturacao the periodoFaturacao to set
+	 */
+	public void setPeriodoFaturacao(String periodoFaturacao) {
+		PeriodoFaturacao = periodoFaturacao;
+	}
+
+	/**
+	 * @return the dataVencimento
+	 */
+	public String getDataVencimento() {
+		return dataVencimento;
+	}
+
+	/**
+	 * @param dataVencimento the dataVencimento to set
+	 */
+	public void setDataVencimento(String dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+	/**
+	 * @return the rodape
+	 */
+	public String getRodape() {
+		return rodape;
+	}
+
+	/**
+	 * @param rodape the rodape to set
+	 */
+	public void setRodape(String rodape) {
+		this.rodape = rodape;
+	}
+
+	/**
+	 * @return the entidade
+	 */
+	public String getEntidade() {
+		return entidade;
+	}
+
+	/**
+	 * @param entidade the entidade to set
+	 */
+	public void setEntidade(String entidade) {
+		this.entidade = entidade;
+	}
+
+	/**
+	 * @return the referencia
+	 */
+	public String getReferencia() {
+		return referencia;
+	}
+
+	/**
+	 * @param referencia the referencia to set
+	 */
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+
+	/**
+	 * @return the mantante
+	 */
+	public String getMantante() {
+		return mantante;
+	}
+
+	/**
+	 * @param mantante the mantante to set
+	 */
+	public void setMantante(String mantante) {
+		this.mantante = mantante;
+	}
+
+	/**
+	 * @return the bi
+	 */
+	public String getBi() {
+		return bi;
+	}
+
+	/**
+	 * @param bi the bi to set
+	 */
+	public void setBi(String bi) {
+		this.bi = bi;
+	}
+
+	/**
+	 * @return the bca
+	 */
+	public String getBca() {
+		return bca;
+	}
+
+	/**
+	 * @param bca the bca to set
+	 */
+	public void setBca(String bca) {
+		this.bca = bca;
+	}
+
+	/**
+	 * @return the bai
+	 */
+	public String getBai() {
+		return bai;
+	}
+
+	/**
+	 * @param bai the bai to set
+	 */
+	public void setBai(String bai) {
+		this.bai = bai;
+	}
+
+	/**
+	 * @return the cecv
+	 */
+	public String getCecv() {
+		return cecv;
+	}
+
+	/**
+	 * @param cecv the cecv to set
+	 */
+	public void setCecv(String cecv) {
+		this.cecv = cecv;
+	}
+
+	/**
+	 * @return the cbn
+	 */
+	public String getCbn() {
+		return cbn;
+	}
+
+	/**
+	 * @param cbn the cbn to set
+	 */
+	public void setCbn(String cbn) {
+		this.cbn = cbn;
+	}
+
+	/**
+	 * @return the bodyResumo
+	 */
+	public BodyResumo[] getBodyResumo() {
+		return BodyResumo;
+	}
+
+	/**
+	 * @param bodyResumo the bodyResumo to set
+	 */
+	public void setBodyResumo(BodyResumo[] bodyResumo) {
+		BodyResumo = bodyResumo;
+	}
+    /**
+     * @return the typeHeader
+     */
+    public String getTypeHeader() {
+        return TypeHeader;
+    }
+
+    /**
+     * @param typeHeader the typeHeader to set
+     */
+    public void setTypeHeader(String typeHeader) {
+        this.TypeHeader = typeHeader;
+    }
+	
+    
+    /**
+     * @return the nomeSubConta
+     */
+    public String getNomeSubConta() {
+        return nomeSubConta;
+    }
+
+    /**
+     * @param typeHeader the typeHeader to set
+     */
+    public void setNomeSubConta(String nomeSubConta) {
+        this.nomeSubConta = nomeSubConta;
+    }
+}

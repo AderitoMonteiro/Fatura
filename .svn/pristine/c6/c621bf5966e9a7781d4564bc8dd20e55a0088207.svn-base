@@ -1,0 +1,627 @@
+package com.ucc2.faturacao;
+
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.model.fatura.BodyDescritivo;
+import com.model.fatura.BodyDetalhado;
+import com.model.fatura.BodyResumoJasper;
+import com.model.fatura.fatura;
+import com.ucc2.auxiliar.FormateData;
+import com.ucc2.auxiliar.GetByteFromFile;
+import com.ucc2.auxiliar.IBB;
+import com.ucc2.auxiliar.Validator;
+import com.ucc2.doc.Detalhado.BodyResumoDetalhado;
+import com.ucc2.doc.descritivo.BodyResumoDesc;
+import com.ucc2.doc.resumo.BodyResumo;
+import com.ucc2.jasper.ListaFaturaGerarPdf;
+import com.ucc2.jasper.testeListaFaturaGerarPdf;
+import com.ucc2.master.Fatura;
+import com.ucc2.master.FaturaResponse;
+import com.ucc2.master.Header;
+import com.ucc2.master.Header2;
+import com.ucc2.master.Referencia;
+import com.ucc2.master.ValidateFatura;
+
+public class FaturacaoService{
+	
+	//public synchronized  FaturaResponse InvoiceService(Fatura novafatura){
+	public   FaturaResponse InvoiceService(Fatura novafatura){
+
+		//tipoFatura
+		//nomeSubConta
+		//int tam = novafatura
+		String reposta="";
+		String TypeHeader="";
+		String nomeSubConta="";
+		String tipoFatura="";
+		byte[] output=null;
+		FaturaResponse faturaResponse =null;
+		try{
+		
+		BodyResumo [] ArraybodyResumoFatura=null;
+		BodyResumo bodyResumo = new BodyResumo();
+		
+		//Header
+		String dataProcessamento="";String morada="";String nif="";String nomeCliente="";String nominhoCliente="";String numCliente="";String numContaCliente="";String numFatura="";String periodoFaturacao="";
+		String valorMes="";String dataVencimento="";String rodape="";String entidade="";String referencia="";String mantante="";String bi="";String bca="";String bai="";String cecv="";String cbn="";
+		
+		//BodyResumo
+		String col_1tituloServico="";String col_1desServico="";Image col_1image=null;String col_1aux1="";String col_1aux2="";String col_1aux3="";String col_2quantidade="";String col_2unidade="";
+		String col_2aux1="";String col_2aux2="";String col_2aux3="";String col_3valorBase="";String col_3moeda="";String col_3aux1="";String col_3aux2="";String col_3aux3="";String col_4extra="";
+		String col_4extraDesc="";String col_4moeda="";String col_4aux1="";String col_4aux2="";String col_4aux3="";String col_5tatal="";String col_5moeda="";double col_5iva=0;String col_5aux1="";
+		String col_5aux2="";String col_5aux3="";String col_5totalEuro="";String col_5ivaDesc="";String valorMesBodyResumo="";String col_5valBruto="";String col_5valRond="";String total_col3="";
+		String total_col4="";String total_col5="";
+		String taxa="";String incidencia="";String imposto="";
+		//BodyDescritivo
+		Image tituloImagem=null;String tituloServico="";String tituloDiscricao="";String tituloValor="";String tituloMoeda="";String tituloValorIva="";double tituloValorIvaDouble=0;String servicoDescritivo="";String servicoValor="";
+		String servicoMoeda="";String servicoValorIva="";double servicoValorIvaDouble=0;String servicoDescIva="";String tituloDesciva="";
+		
+		int valorMesResult=0;
+		//BodyDetalhado
+		Image imagemServico=null;String tituloServicoBodyDetalhado="";String tituloDescricao="";Image tipoDImagem_imagem=null;String tipoDetalhe="";String header_quantidade="";String header_valor="";
+		String col_1data="";String col_2label="";String col_4extraBodyDetalhado="";String col_5tipochamada="";String col_6valor="";String col_3duracao="";String col_2value="";
+		String valorMesFormatado="";
+		String footerValorTotal="";
+		String footerValorTotalIncidencia="";
+		String totalEuro="";
+		String col_5ivaFinal="";
+		String col_5totaliva_ultimo="";
+		if(novafatura != null){
+			
+				ArrayList<fatura> listFatura = new ArrayList<fatura>(); 
+				fatura f = new fatura();
+				
+				List<BodyDescritivo> List_bodyDescritivo = new ArrayList<BodyDescritivo>();
+				List<BodyDetalhado> List_bodyDetalhado = new ArrayList<BodyDetalhado>();
+				List<BodyResumoJasper> List_bodyResumoJasper = new ArrayList<BodyResumoJasper>();
+				
+				BodyResumoJasper bodyResumoJasper = new BodyResumoJasper();
+				BodyDescritivo bodyDescritivo = new BodyDescritivo();
+				BodyDetalhado bodyDetalhado = new BodyDetalhado();
+				BodyResumoDesc [] ArraybodyResumoDesc = null;
+				BodyResumoDetalhado [] ArrayBodyResumoDetalhado=null;
+				//Get Header
+				dataProcessamento=novafatura.getDataProcessamento();
+				morada=novafatura.getMorada();
+				nif=novafatura.getNif();
+				nomeCliente=novafatura.getNomeCliente();
+				nominhoCliente=novafatura.getNominhoCliente();
+				numCliente=novafatura.getNumCliente();
+				numContaCliente=novafatura.getNumContaCliente();
+				numFatura=novafatura.getNumFatura();
+				periodoFaturacao=novafatura.getPeriodoFaturacao();
+				valorMes=novafatura.getValorMes();
+				dataVencimento = novafatura.getDataVencimento();
+				rodape = "NIF:252214420 | Registo comercial: Conservatória dos Registos da Praia – Secção Comercial nº 1874\nAv. Cidade Lisboa - Edifício BAI Center 4º e 6º Piso - 346ª Praia - Santiago, Cabo Verde";
+				entidade = novafatura.getEntidade();
+				referencia = novafatura.getReferencia();
+				mantante = novafatura.getMantante();
+				//System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NIF "+nif + "  "+numCliente);
+				//System.out.println(numCliente);
+
+				if(mantante==null){
+					mantante="0";
+				}
+				bi = novafatura.getBi();
+				bca = novafatura.getBca();
+				bai = novafatura.getBai();
+				cecv = novafatura.getCecv();
+				cbn = novafatura.getCbn();
+				TypeHeader = novafatura.getTypeHeader();
+				nomeSubConta=novafatura.getNomeSubConta();
+				if(nomeSubConta==null){nomeSubConta="";}
+				double totalValorBase=0;
+				double totalExtra=0;
+				double totalTotal=0;
+				double percentagem=0;
+				double incidenciaresultado=0;
+				double impostoresultado=0;
+
+				//Get BodyResumo []
+				ArraybodyResumoFatura=novafatura.getBodyResumo();
+				if(ArraybodyResumoFatura!=null){
+					int tamBodyResumoFatura=ArraybodyResumoFatura.length;
+					//System.out.println("3");
+					
+					String valorBaseValue="";
+					String extraValue="";
+					String totalComIva="";
+					
+					for(int x=0;x<tamBodyResumoFatura;x++){
+						bodyResumo=ArraybodyResumoFatura[x];
+						valorBaseValue=bodyResumo.getValorBaseValue();
+						if(valorBaseValue==null || valorBaseValue==""){
+							valorBaseValue="0";
+						}
+						extraValue=bodyResumo.getExtraValue();
+						if(extraValue==null || extraValue==""){
+							extraValue="0";
+						}
+						totalComIva=bodyResumo.getTotalComIva();
+						if(totalComIva==null || totalComIva==""){
+							totalComIva="0";
+						}
+						totalValorBase=totalValorBase+Float.parseFloat(valorBaseValue);
+						totalExtra=totalExtra+Float.parseFloat(extraValue);
+						totalTotal=totalTotal+Float.parseFloat(totalComIva);
+						taxa=bodyResumo.getTaxa();
+					
+					}
+					
+					double doubleValorMes=Double.parseDouble(valorMes);
+					valorMesFormatado=FormateData.getVal(doubleValorMes);
+			        String footerValorArrendondamento="-0,"+valorMesFormatado.substring(valorMesFormatado.length()-2, valorMesFormatado.length());
+			      //  String footerValorRegConta="0,00";
+			        footerValorTotal=valorMesFormatado.substring(0, valorMesFormatado.length()-2)+"00";
+			        col_5totaliva_ultimo="("+FormateData.getVal(doubleValorMes/1.15)+")";
+					incidencia=valorMes;
+					incidenciaresultado=Double.parseDouble(incidencia);
+					//incidenciaresultado=doubleValorMes/1.15;//Double.parseDouble(incidencia);
+					
+					percentagem=(Float.parseFloat(taxa)/100)+1;
+					impostoresultado=incidenciaresultado-(incidenciaresultado/percentagem);
+					imposto=FormateData.getVal(impostoresultado);
+					footerValorTotalIncidencia=FormateData.getVal(doubleValorMes/1.15);
+					for(int j=0;j<tamBodyResumoFatura;j++){
+						bodyResumoJasper = new BodyResumoJasper();
+						bodyResumo = new BodyResumo();
+						bodyResumo=ArraybodyResumoFatura[j];
+						Image imgcol_1image=null;
+						//Get Variaveis
+						col_1tituloServico=bodyResumo.getProdutoTitulo();
+					//	System.out.println("ProdutoTitulo "+bodyResumo.getProdutoTitulo());
+						col_1desServico=bodyResumo.getProdutoDescricao();
+						//System.out.println("ProdutoImagem "+bodyResumo.getProdutoImagem());
+						
+						 imgcol_1image=GetByteFromFile.generate(bodyResumo.getProdutoImagem());
+						// System.out.println("imgcol_1image "+imgcol_1image);
+						//col_1image=imgcol_1image;
+	//					col_1aux1
+	//					col_1aux2
+	//					col_1aux3
+						col_2quantidade=bodyResumo.getValorQuantidadeValue();
+						col_2unidade=bodyResumo.getValorQuantidadeUnidade();
+	//					col_2aux1
+	//					col_2aux2
+	//					col_2aux3
+						col_3valorBase=bodyResumo.getValorBaseValue();
+						if(col_3valorBase == null || col_3valorBase==""){
+							col_3valorBase="0";
+						}
+						col_3valorBase=FormateData.getVal(Double.parseDouble(col_3valorBase));
+						col_3moeda=bodyResumo.getValorBaseUnidade();
+	//					col_3aux1
+	//					col_3aux2
+	//					col_3aux3
+						col_4extra=bodyResumo.getExtraValue();
+						if(col_4extra == null || col_4extra==""){
+							col_4extra="0";
+						}
+						col_4extra=FormateData.getVal(Double.parseDouble(col_4extra));
+						if(col_4extra.equals("0,00")){
+							col_4extra="-";
+						}
+						col_4extraDesc="";
+	//					col_4moeda
+	//					col_4aux1
+	//					col_4aux2
+	//					col_4aux3
+						col_5tatal=bodyResumo.getTotalComIva();
+						if(col_5tatal == null || col_5tatal==""){
+							col_5tatal="0";
+							col_5ivaFinal="(0)";
+						}else{
+							col_5iva=Double.parseDouble(col_5tatal)/1.15;
+							col_5ivaFinal="("+FormateData.getVal(col_5iva)+")";
+						}
+						col_5tatal=FormateData.getVal(Double.parseDouble(col_5tatal));
+						col_5moeda=bodyResumo.getValorBaseUnidade();
+						
+						
+						//bodyResumo.getTotalValueSemIva();
+						///col_5aux1=bodyResumo.get
+	//					col_5aux2
+	//					col_5aux3
+						//col_5totalEuro=bodyResumo.getTotalEuro();
+						//System.out.println("col_5totalEuro : "+col_5totalEuro);
+						//if(col_5totalEuro!=null){
+							double re=doubleValorMes/110.265;
+							//double re=r+0.0;
+							totalEuro=FormateData.getVal(re);
+						//}
+						col_5ivaDesc="Sem IVA";
+						//bodyResumo.getVaDesc();
+						//valorMes=bodyResumo.getValorMes();
+						col_5valBruto=bodyResumo.getValorBruto();
+						col_5valRond=bodyResumo.getValorRond();
+						//totalValorBase=totalValorBase+bodyResumo.get
+						total_col3=FormateData.getVal(totalValorBase);
+						total_col4=FormateData.getVal(totalExtra);
+						total_col5=FormateData.getVal(totalTotal);
+						taxa=bodyResumo.getTaxa();
+						if(total_col4.equals("0,00")){
+							total_col4="-";
+						}
+						bodyResumoJasper.setCol_1tituloServico(col_1tituloServico);
+						bodyResumoJasper.setCol_1desServico(col_1desServico);
+					//	System.out.println(" imgcol_1image 02  "+imgcol_1image);
+						bodyResumoJasper.setCol_1image(imgcol_1image);//
+						bodyResumoJasper.setCol_2quantidade(col_2quantidade);
+						bodyResumoJasper.setCol_2unidade(col_2unidade);
+						bodyResumoJasper.setCol_3valorBase(col_3valorBase);
+						bodyResumoJasper.setCol_3moeda(col_3moeda);
+						bodyResumoJasper.setCol_4extra(col_4extra);
+						bodyResumoJasper.setCol_4extraDesc(col_4extraDesc);
+						bodyResumoJasper.setCol_5tatal(col_5tatal);
+						bodyResumoJasper.setCol_5moeda(col_5moeda);
+						bodyResumoJasper.setCol_5iva(col_5ivaFinal);
+						bodyResumoJasper.setCol_5aux1(col_5aux1);
+						bodyResumoJasper.setCol_5aux2(col_5aux2);
+						bodyResumoJasper.setCol_5aux3(col_5aux3);
+						bodyResumoJasper.setCol_5totalEuro(totalEuro+" Euro");
+						bodyResumoJasper.setCol_5ivaDesc(col_5ivaDesc);
+						bodyResumoJasper.setValorMes(valorMesBodyResumo);
+						bodyResumoJasper.setCol_5valBruto(valorMesFormatado);
+						bodyResumoJasper.setCol_5valRond(footerValorArrendondamento);
+						bodyResumoJasper.setTotal_col3(total_col3);
+						bodyResumoJasper.setTotal_col4(total_col4);
+						bodyResumoJasper.setTotal_col5(footerValorTotal);
+						bodyResumoJasper.setTaxa(taxa +" %");
+						//bodyResumoJasper.setIncidencia(footerValorTotal);
+						bodyResumoJasper.setIncidencia(footerValorTotalIncidencia);
+						
+						bodyResumoJasper.setImposto(imposto);
+						bodyResumoJasper.setCol_5totaliva_ultimo(col_5totaliva_ultimo);
+						bodyResumoJasper.setCol_5desciva_ultimo("Sem IVA");
+						List_bodyResumoJasper.add(bodyResumoJasper);
+						
+						// GET BodyResumoDesc
+						ArraybodyResumoDesc=bodyResumo.getBodyResumoDesc();
+						
+						if(ArraybodyResumoDesc!=null){
+							int tambodyResumoDesc = ArraybodyResumoDesc.length;
+							BodyResumoDesc bodyResumoDesc=new BodyResumoDesc();
+							
+							for(int i=0;i<tambodyResumoDesc;i++){
+								bodyResumoDesc=new BodyResumoDesc();
+								bodyDescritivo = new BodyDescritivo();
+								bodyResumoDesc=ArraybodyResumoDesc[i];
+								//Image imgCol_tituloImagem = GetByteFromFile.generate(bodyResumoDesc.getTituloImagem());
+							//	tituloImagem =imgcol_1image;
+										//GetByteFromFile.generate(bodyResumoDesc.getTituloImagem()); 
+										//imgcol_1image;
+								tituloServico = bodyResumoDesc.getTituloServico();
+								tituloDiscricao = bodyResumoDesc.getTituloDiscricao();
+								tituloValor = bodyResumoDesc.getTituloValor()+"";
+								if(tituloValor==null || tituloValor==""){
+									tituloValor="0";
+								}else{
+									tituloValorIvaDouble=Double.parseDouble(tituloValor)/1.15;
+								}
+								tituloValor=FormateData.getVal(Double.parseDouble(tituloValor));
+								tituloMoeda = bodyResumoDesc.getTituloMoeda();
+								tituloValorIva = "("+FormateData.getVal(tituloValorIvaDouble)+")";
+								//= bodyResumoDesc.getTituloValorIva();
+								
+								servicoDescritivo = bodyResumoDesc.getServicoDescritivo();
+								servicoValor = bodyResumoDesc.getServicoValor();
+								servicoMoeda = bodyResumoDesc.getServicoMoeda();
+								if(servicoValor==null || servicoValor==""){
+									servicoValor="0";
+								}else{
+									servicoValorIvaDouble=Double.parseDouble(servicoValor)/1.15;
+								}
+								servicoValor=FormateData.getVal(Double.parseDouble(servicoValor));
+								servicoValorIva =  "("+FormateData.getVal(servicoValorIvaDouble)+")";
+										//bodyResumoDesc.getServicoValorIva();
+								servicoDescIva = "Sem IVA";
+										//bodyResumoDesc.getServicoDescIva();
+								tituloDesciva = "Sem IVA";
+										//bodyResumoDesc.getTituloDesciva();
+								
+//								if(servicoValor!=null){
+//									doubleTituloValor=doubleTituloValor+Double.parseDouble(servicoValor);
+//									servicoValor=servicoValor+"";
+//								}
+								
+								//System.out.println("tituloImagem : "+tituloImagem);
+//								System.out.println("tituloServico : "+tituloServico);
+//								System.out.println("tituloDiscricao : "+tituloDiscricao);
+//								System.out.println("tituloValor : "+tituloValor);
+//								System.out.println("tituloMoeda : "+tituloMoeda);
+//								System.out.println("tituloValorIva : "+tituloValorIva);
+//								System.out.println("servicoDescritivo : "+servicoDescritivo);
+//								System.out.println("servicoValor : "+servicoValor);
+//								System.out.println("servicoMoeda : "+servicoMoeda);
+//								System.out.println("servicoValorIva : "+servicoValorIva);
+//								System.out.println("servicoDescIva : "+servicoDescIva);
+//								System.out.println("tituloDesciva : "+tituloDesciva);
+								// Set bodyDescritivo
+								bodyDescritivo.setTituloImagem(imgcol_1image);
+								bodyDescritivo.setTituloServico(col_1tituloServico);
+								bodyDescritivo.setTituloDiscricao(tituloDiscricao);
+								bodyDescritivo.setTituloValor(tituloValor);
+								bodyDescritivo.setTituloMoeda(tituloMoeda);
+								bodyDescritivo.setTituloValorIva(tituloValorIva);
+								bodyDescritivo.setServicoDescritivo(servicoDescritivo);
+								bodyDescritivo.setServicoValor(servicoValor);
+								bodyDescritivo.setServicoMoeda(servicoMoeda);
+								bodyDescritivo.setServicoValorIva(servicoValorIva);
+								bodyDescritivo.setServicoDescIva(servicoDescIva);
+								bodyDescritivo.setTituloDesciva(tituloDesciva);
+								
+								List_bodyDescritivo.add(bodyDescritivo);
+								
+								
+								//Get BodyResumoDetalhado
+								ArrayBodyResumoDetalhado=bodyResumoDesc.getBodyResumoDetalhado();
+								
+								if(ArrayBodyResumoDetalhado != null){
+									int tamBodyResumoDetalhado=ArrayBodyResumoDetalhado.length;
+									BodyResumoDetalhado bodyResumoDetalhado=new BodyResumoDetalhado();
+									for(int k=0;k<tamBodyResumoDetalhado;k++){
+										bodyResumoDetalhado=ArrayBodyResumoDetalhado[k];
+										bodyResumoDetalhado=new BodyResumoDetalhado();
+										bodyDetalhado=new BodyDetalhado();
+										Image imgCol_imagemServico = GetByteFromFile.generate(bodyResumoDetalhado.getImagemServico());
+										imagemServico=imgCol_imagemServico;
+										tituloServicoBodyDetalhado=bodyResumoDetalhado.getTituloServico();
+										tituloDescricao=bodyResumoDetalhado.getTituloDescricao();
+										Image imgCol_tipoDImagem_imagem = GetByteFromFile.generate(bodyResumoDetalhado.getTipoImagem());
+										tipoDImagem_imagem=imgCol_tipoDImagem_imagem;
+										tipoDetalhe=bodyResumoDetalhado.getTipoDetalhe();
+										
+									//	System.out.println("tipoDetalhe : "+tipoDetalhe);
+										
+										if(tipoDetalhe.equals("Dados")){
+											col_2label="MB´s";
+										}else{
+											col_2label="Nº Destino";
+										}
+										header_quantidade=bodyResumoDetalhado.getHeaderQuantidade();
+										header_valor=bodyResumoDetalhado.getHeaderValor();
+										col_1data=bodyResumoDetalhado.getData();
+										col_2label=bodyResumoDetalhado.getLabel();
+										col_4extraBodyDetalhado=bodyResumoDetalhado.getExtra();
+										col_5tipochamada=bodyResumoDetalhado.getTipochamada();
+										col_6valor=bodyResumoDetalhado.getValor();
+										col_3duracao=bodyResumoDetalhado.getDuracao();
+										col_2value=bodyResumoDetalhado.getValue();
+									
+										//set BodyDetalhado
+										bodyDetalhado.setImagemServico(imagemServico);
+										bodyDetalhado.setTituloServico(tituloServicoBodyDetalhado);
+										bodyDetalhado.setTituloDescricao(tituloDescricao);
+										bodyDetalhado.setTipoDImagem_imagem(tipoDImagem_imagem);
+										bodyDetalhado.setTipoDetalhe(tipoDetalhe);
+										bodyDetalhado.setHeader_quantidade(header_quantidade);
+										bodyDetalhado.setHeader_valor(header_valor);
+										bodyDetalhado.setCol_1data(col_1data);
+										bodyDetalhado.setCol_2label(col_2label);
+										bodyDetalhado.setCol_4extra(col_4extraBodyDetalhado);
+										bodyDetalhado.setCol_5tipochamada(col_5tipochamada);
+										bodyDetalhado.setCol_6valor(col_6valor);
+										bodyDetalhado.setCol_3duracao(col_3duracao);
+										bodyDetalhado.setCol_2value(col_2value);
+										
+										List_bodyDetalhado.add(bodyDetalhado);
+									}
+								}
+							}
+						
+						}
+						
+					}
+				}
+				if(dataProcessamento.length()>10){
+					dataProcessamento=dataProcessamento.substring(0, 10);
+					dataProcessamento=FormateData.GetDescMes(dataProcessamento);
+				}
+				f.setDataProcessamento(dataProcessamento);
+				f.setMorada(morada);
+				f.setNif(nif);
+				f.setNomeCliente(nomeCliente);
+				f.setNominhoCliente(nominhoCliente);
+				f.setNumCliente(numCliente);
+				f.setNumContaCliente(numContaCliente);
+				f.setNumFatura(numFatura);
+				
+				if(TypeHeader.equals("2") || TypeHeader.equals("3") || TypeHeader.equals("4")){
+					f.setNumFatura("");
+				}
+				
+				if(periodoFaturacao!=null && periodoFaturacao!=""){
+					periodoFaturacao=FormateData.GetPeriodoFaturacao(periodoFaturacao);
+				}
+				f.setPeriodoFaturacao(periodoFaturacao);
+				f.setValorMes(footerValorTotal);
+				if(dataVencimento.length()>10){
+					dataVencimento=dataVencimento.substring(0, 10);
+					dataVencimento=FormateData.GetDescMes(dataVencimento);
+				}
+				f.setDataVencimento(dataVencimento);
+				f.setRodape(rodape);
+				f.setEntidade(entidade);
+				f.setReferencia(referencia);
+				f.setMantante(footerValorTotal);
+				if(TypeHeader.equals("2") || TypeHeader.equals("3") || TypeHeader.equals("4")){
+					f.setEntidade("");
+					f.setReferencia("");
+					f.setMantante("");
+				}
+				
+				f.setBi(bi);
+				f.setBca(bca);
+				f.setBai(bai);
+				f.setCecv(cecv);
+				f.setCbn(cbn);
+				
+				
+				
+				if(TypeHeader.equals("1")){
+					tipoFatura="Fatura";
+					System.out.println(" ##########   FATURA IMPRIMIDO ########## ");
+				}
+				if(TypeHeader.equals("2")){
+					tipoFatura="Fatura Proforma";
+					System.out.println(" ##########   FATURA PROFORMA IMPRIMIDO ########## ");
+				}
+				if(TypeHeader.equals("3")){
+					tipoFatura="Fatura Preview";
+					System.out.println(" ##########   FATURA PREVIEW IMPRIMIDO ########## ");
+				}
+				if(TypeHeader.equals("4")){
+					tipoFatura="Fatura Proforma Preview";
+					System.out.println(" ##########   FATURA PROFORMA PREVIEW IMPRIMIDO ########## ");
+				}
+			
+				f.setTipoFatura(tipoFatura);
+				f.setNomeSubConta(nomeSubConta);
+				f.setBodyResumo(List_bodyResumoJasper);
+				f.setBodyDescritivo(List_bodyDescritivo);
+				f.setBodyDetalhado(List_bodyDetalhado);
+
+				listFatura=new ArrayList<fatura>();  
+				listFatura.add(f);
+				//Thread.sleep(10000);
+				System.out.println("ANTES Gerar Pdf : "+listFatura.size());
+				System.out.println("ANTES Gerar ___Pdf222345678 __: "+listFatura.size());
+				ListaFaturaGerarPdf listaFaturaGerarPdf = new ListaFaturaGerarPdf();
+				output=listaFaturaGerarPdf.GerarPdfListaFatura(listFatura);
+				System.out.println("DEPOIS Gerar Pdf");
+				if(valorMes!=null && valorMes!=""){
+					//System.out.println("valorMes : "+valorMes);
+					valorMesResult=(int) Float.parseFloat(valorMes);
+				}
+				
+				faturaResponse=new FaturaResponse();
+				
+				faturaResponse.setOutput(output);
+				faturaResponse.setValorMes(valorMesResult);
+				
+				//return output;
+		}else{
+			return faturaResponse;
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Erro no ficheiro");
+		}
+		
+		return faturaResponse;
+	}
+	
+	public String GetTimer(int time){
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "ok";
+	}
+	public String InvoiceHeader(Header header){
+		
+		List<Header2> faturas = new ArrayList<Header2>();
+		
+		Header2 header2 = new Header2();
+		Image imglogo=GetByteFromFile.generate(header.getImglogo());
+		//generate
+		
+		//byte[] imglogo;
+		header2.setImglogo(imglogo);
+		
+		header2.setPeriodoFaturacao(header.getPeriodoFaturacao());
+		header2.setValorMes(header.getValorMes());
+		header2.setMorada(header.getMorada());
+		
+		faturas.add(header2);
+		
+		testeListaFaturaGerarPdf.GerarPdfListaFatura(faturas);
+		return null;
+	}
+	public Referencia getReferencia(String NumFatura, String Entidade, String TypeHeader){
+		
+		Referencia referencia = new Referencia();
+//		
+//		System.out.println("NumFatura "+NumFatura);
+//		System.out.println("Entidade "+Entidade);
+//		System.out.println("TypeHeader "+TypeHeader);
+		if(Entidade==null || NumFatura==null || Entidade==""){
+			return null;
+		}else{
+			try {
+
+					//TypeHeader 1 fatura
+					if(TypeHeader.equals("1") && NumFatura!=""){
+						IBB ibb= new IBB();
+						
+						String ref_pag=NumFatura.substring(NumFatura.length()-7, NumFatura.length());
+			
+						String iban=Entidade + ref_pag;
+						String checkD=ibb.calculate(iban);
+						String REF_PAG_SISP = ref_pag+checkD;
+						String CheckDigit = checkD;
+						String REF_PAG = ref_pag;
+						
+						
+						referencia.setNumeroFatura(NumFatura);
+						referencia.setEntidade(Entidade);
+						referencia.setREF_PAG_SISP(REF_PAG_SISP);
+						referencia.setCheckDigit(CheckDigit);
+						referencia.setREF_PAG(REF_PAG);
+					}else{
+							if(TypeHeader.equals("2") || TypeHeader.equals("3") || TypeHeader.equals("4")){
+									referencia.setNumeroFatura("");
+									referencia.setEntidade("");
+									referencia.setREF_PAG_SISP("000000000");
+									referencia.setCheckDigit("");
+									referencia.setREF_PAG("000000000");
+							}else{
+									referencia.setNumeroFatura("");
+									referencia.setEntidade("");
+									referencia.setREF_PAG_SISP("");
+									referencia.setCheckDigit("");
+									referencia.setREF_PAG("000000000");
+							}
+					}
+				return referencia;
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				return null;
+			}
+		}
+		//return referencia;
+	} 
+	public int ValidateFatura(ValidateFatura validateFatura){
+		
+		int resultado=0;
+		String numFatura="";
+		String TypeHeader="";
+		
+		if(validateFatura != null){
+			numFatura=validateFatura.getNumFatura();
+			TypeHeader=validateFatura.getTypeHeader();
+		
+			try {
+					resultado = Validator.ValidateFatura(numFatura,TypeHeader);
+					return resultado;
+					
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		return resultado;
+		
+	}
+	public String Teste(String numFatura){
+		System.out.println("TESTE");
+		return numFatura;
+		
+	}
+}
